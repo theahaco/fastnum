@@ -5,7 +5,7 @@ use core::{
 };
 
 #[cfg(not(feature = "std"))]
-use alloc::{format, string::String};
+use crate::alloc::{format, string::String};
 
 use crate::utils::err_prefix;
 

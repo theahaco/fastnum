@@ -40,6 +40,7 @@ bytes = { version = "1.1.0", default-features = false, optional = true }
 byteorder = { version = "1.5.0", default-features = false, optional = true }
 utoipa = { version = ">= 5.0.0", default-features = false, optional = true }
 tokio-postgres = { version = "0.7.13", default-features = false, optional = true }
+arrayvec = { version = "0.7.3", default-features = false, optional = true }
 
 [dev-dependencies]
 rstest = { version = "0.23.0" }
@@ -52,7 +53,7 @@ itertools = { version = "0.14.0" }
 #rustversion = "1"
 
 [features]
-default = ["std"]
+default = []
 std = []
 
 numtraits = ["num-traits", "bnum/numtraits", "num-integer"]
@@ -81,6 +82,9 @@ dev = []
 test-util = ["num-traits/std"]
 extra-postgres = ["num-traits"]
 extra-postgres-encode = ["extra-postgres", "bytes", "byteorder"]
+
+# don't require alloc
+no_alloc = ["dep:arrayvec"]
 
 [profile.release]
 lto = true # enable link-time optimization for faster runtime, but slower compile time

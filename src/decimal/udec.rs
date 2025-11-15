@@ -5,7 +5,7 @@ mod impls;
 use core::{cmp::Ordering, num::FpCategory};
 
 #[cfg(not(feature = "std"))]
-use alloc::string::String;
+use crate::alloc::string::String;
 
 use crate::{
     bint::UInt,

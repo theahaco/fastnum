@@ -25,7 +25,7 @@ pub(crate) use extra_precision::ExtraPrecision;
 use core::{cmp::Ordering, fmt, num::FpCategory, panic};
 
 #[cfg(not(feature = "std"))]
-use alloc::{format, string::String};
+use crate::alloc::{format, string::String};
 
 use crate::{
     bint::UInt,

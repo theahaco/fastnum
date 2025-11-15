@@ -3,7 +3,16 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 // #![cfg_attr(nightly, feature(generic_const_exprs))]
 
-extern crate alloc;
+// #[cfg(all(not(feature = "std"), not(feature="no_alloc")))]
+// extern crate alloc;
+
+#[cfg(not(feature = "std"))]
+mod alloc;
+
+#[cfg(feature="no_alloc")]
+#[macro_use]
+mod macros;
+
 extern crate core;
 
 pub mod bint;

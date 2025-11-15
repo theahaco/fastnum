@@ -1,7 +1,9 @@
 use core::{cmp::Ordering, fmt, fmt::Write, ops::Neg};
 
+#[cfg(feature = "no_alloc")]
+use crate::alloc::prelude::*;
 #[cfg(not(feature = "std"))]
-use alloc::{string::String, vec::Vec};
+use crate::alloc::{string::String, vec::Vec};
 
 use crate::decimal::round::round_pair_digits;
 #[cfg(not(feature = "numtraits"))]

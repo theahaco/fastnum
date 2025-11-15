@@ -1,4 +1,4 @@
-use alloc::borrow::Cow;
+use crate::alloc::borrow::Cow;
 
 use utoipa::{
     __dev::ComposeSchema,

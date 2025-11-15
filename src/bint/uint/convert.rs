@@ -12,7 +12,7 @@ use bnum::BUint;
 use core::str::from_utf8_unchecked;
 
 #[cfg(not(feature = "std"))]
-use alloc::{string::String, vec::Vec};
+use crate::alloc::{string::String, vec::Vec};
 
 use crate::bint::{
     convert, doc,
