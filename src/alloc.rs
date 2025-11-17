@@ -1,7 +1,8 @@
 #[cfg(feature = "no_alloc")]
+#[allow(unused)]
 mod alloc {
     pub mod prelude {
-        pub use super::string::ArrayToString;
+        pub use super::string::ToString;
         pub use super::string::StringExt;
         pub use super::vec::VecExt;
         pub use core::iter::Extend;
@@ -13,17 +14,21 @@ mod alloc {
 
         pub type String = arrayvec::ArrayString<102>;
 
-        pub trait ArrayToString {
+        pub trait ToString {
             fn to_string(&self) -> String;
         }
         pub trait StringExt {
             fn into_bytes(&self) -> super::vec::Vec<u8>;
-            fn from_utf8(bytes: &[u8]) -> Option<String>;
+            #[allow(unsafe_code)]
+            unsafe fn from_utf8_unchecked(bytes: impl AsRef<[u8]>) -> String {
+                Self::from_utf8(bytes).unwrap_unchecked()
+            }
+            fn from_utf8(bytes: impl AsRef<[u8]>) -> Option<String>;
             fn extend<I: IntoIterator<Item = char>>(&mut self, iter: I);
             fn insert(&mut self, i: usize, c: char);
         }
 
-        impl<T: core::fmt::Display> ArrayToString for T {
+        impl<T: core::fmt::Display> ToString for T {
             fn to_string(&self) -> String {
                 format!("{self}")
             }
@@ -34,8 +39,8 @@ mod alloc {
                 super::vec::Vec::try_from(self.as_bytes()).unwrap()
             }
 
-            fn from_utf8(bytes: &[u8]) -> Option<Self> {
-                let s = core::str::from_utf8(bytes).ok()?;
+            fn from_utf8(bytes: impl AsRef<[u8]>) -> Option<Self> {
+                let s = core::str::from_utf8(bytes.as_ref()).ok()?;
                 let mut array_string = String::new();
                 array_string.push_str(s);
                 Some(array_string)
@@ -94,16 +99,21 @@ mod alloc {
         }
     }
     pub mod vec {
-        pub type Vec<T> = arrayvec::ArrayVec<T, 100>;
+        pub const MAX_CAPACITY: usize = 100;
+        pub type Vec<T> = arrayvec::ArrayVec<T, MAX_CAPACITY>;
         pub trait VecExt<T> {
             fn resize(&mut self, new_len: usize, value: T);
             fn extend_from_slice(&mut self, other: &[T]);
-            // fn extend(&mut self, other: &[T]);
+
+            fn with_capacity(capacity: usize) -> Self;
+
+            fn from_slice(slice: &[T]) -> Self;
+            
         }
 
         impl<T> VecExt<T> for Vec<T>
         where
-            T: Clone
+            T: Clone + Copy
         {
             fn resize(&mut self, new_len: usize, value: T) {
                 let current_len = self.len();
@@ -120,6 +130,20 @@ mod alloc {
             fn extend_from_slice(&mut self, other: &[T]) {
                 self.try_extend_from_slice(other).unwrap();
             }
+
+            fn with_capacity(capacity: usize) -> Self {
+                assert!(capacity <= MAX_CAPACITY, "Requested capacity exceeds ArrayVec capacity");
+                Vec::new()
+            }
+            
+            fn from_slice(slice: &[T]) -> Self {
+                let mut v = Vec::new();
+                v.extend_from_slice(slice);
+                v
+            }
+            
+
+
         }
     }
 }

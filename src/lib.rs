@@ -7,11 +7,7 @@
 // extern crate alloc;
 
 #[cfg(not(feature = "std"))]
-mod alloc;
-
-#[cfg(feature="no_alloc")]
-#[macro_use]
-mod macros;
+pub use bnum::alloc;
 
 extern crate core;
 

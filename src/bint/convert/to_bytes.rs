@@ -3,14 +3,14 @@ macro_rules! to_bytes_impl {
         #[doc = doc::convert::to_radix_be!($sign 256)]
         #[must_use = doc::must_use_op!()]
         #[inline(always)]
-        pub fn to_radix_be(&self, radix: u32) -> Vec<u8> {
+        pub fn to_radix_be(&self, radix: u32) -> crate::alloc::vec::Vec<u8> {
             self.0.to_radix_be(radix)
         }
 
         #[doc = doc::convert::to_radix_le!($sign 256)]
         #[must_use = doc::must_use_op!()]
         #[inline(always)]
-        pub fn to_radix_le(&self, radix: u32) -> Vec<u8> {
+        pub fn to_radix_le(&self, radix: u32) -> crate::alloc::vec::Vec<u8> {
             self.0.to_radix_le(radix)
         }
     };

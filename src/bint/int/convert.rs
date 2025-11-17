@@ -14,7 +14,7 @@ use bnum::BInt;
 use core::str::from_utf8_unchecked;
 
 #[cfg(not(feature = "std"))]
-use crate::alloc::{string::String, vec::Vec};
+use crate::alloc::string::String;
 
 use crate::bint::{
     convert, doc,
