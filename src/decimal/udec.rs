@@ -4,8 +4,8 @@ mod impls;
 
 use core::{cmp::Ordering, num::FpCategory};
 
-#[cfg(not(feature = "std"))]
-use crate::alloc::string::String;
+// #[cfg(not(feature = "std"))]
+// use crate::alloc::string::String;
 
 use crate::{
     bint::UInt,
@@ -1277,10 +1277,10 @@ impl<const N: usize> UnsignedDecimal<N> {
     /// let n = udec256!(12345678);
     /// assert_eq!(&n.to_scientific_notation(), "1.2345678e7");
     /// ```
-    #[inline]
-    pub fn to_scientific_notation(&self) -> String {
-        self.0.to_scientific_notation()
-    }
+    // #[inline]
+    // pub fn to_scientific_notation(&self) -> String {
+    //     self.0.to_scientific_notation()
+    // }
 
     /// Create a string of this unsigned decimal in engineering notation.
     ///
@@ -1295,10 +1295,10 @@ impl<const N: usize> UnsignedDecimal<N> {
     /// let n = udec256!(12345678);
     /// assert_eq!(&n.to_engineering_notation(), "12.345678e6");
     /// ```
-    #[inline]
-    pub fn to_engineering_notation(&self) -> String {
-        self.0.to_engineering_notation()
-    }
+    // #[inline]
+    // pub fn to_engineering_notation(&self) -> String {
+    //     self.0.to_engineering_notation()
+    // }
 
     /// Converts the given unsigned decimal to a signed decimal number.
     ///
@@ -1353,7 +1353,7 @@ impl<const N: usize> UnsignedDecimal<N> {
 
 #[doc(hidden)]
 impl<const N: usize> UnsignedDecimal<N> {
-    const TYPE_NAME: &'static str = decimal::utils::fmt::type_name!("UD");
+    // const TYPE_NAME: &'static str = decimal::utils::fmt::type_name!("UD");
 
     #[inline(always)]
     pub(crate) const fn new(dec: Decimal<N>) -> Self {
@@ -1369,10 +1369,10 @@ impl<const N: usize> UnsignedDecimal<N> {
         }
     }
 
-    #[inline]
-    pub(crate) const fn type_name() -> &'static str {
-        Self::TYPE_NAME
-    }
+    // #[inline]
+    // pub(crate) const fn type_name() -> &'static str {
+    //     Self::TYPE_NAME
+    // }
 
     #[inline(always)]
     pub(crate) const fn signals(&self) -> Signals {

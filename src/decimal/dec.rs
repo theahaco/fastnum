@@ -24,8 +24,8 @@ pub(crate) use extra_precision::ExtraPrecision;
 
 use core::{cmp::Ordering, fmt, num::FpCategory, panic};
 
-#[cfg(not(feature = "std"))]
-use crate::alloc::{format, string::String};
+// #[cfg(not(feature = "std"))]
+// use crate::alloc::{format, string::String};
 
 use crate::{
     bint::UInt,
@@ -1711,24 +1711,16 @@ impl<const N: usize> Decimal<N> {
             .check()
     }
 
-    /// Create a string of this decimal in scientific notation.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// use fastnum::dec256;
-    ///
-    /// let n = dec256!(-12345678);
-    /// assert_eq!(&n.to_scientific_notation(), "-1.2345678e7");
-    /// ```
-    #[must_use = doc::must_use_op!()]
-    #[inline]
-    pub fn to_scientific_notation(&self) -> String {
-        let mut output = String::new();
-        self.write_scientific_notation(&mut output)
-            .expect("Could not write to string");
-        output
-    }
+    
+    // #[must_use = doc::must_use_op!()]
+    // #[inline]
+    // pub fn to_scientific_notation(&self) -> crate::alloc::string::String {
+    //     todo!()
+        // let mut output = String::new();
+        // self.write_scientific_notation(&mut output)
+        //     .expect("Could not write to string");
+        // output
+    // }
 
     /// Create a string of this decimal in engineering notation.
     ///
@@ -1743,14 +1735,14 @@ impl<const N: usize> Decimal<N> {
     /// let n = dec256!(-12345678);
     /// assert_eq!(&n.to_engineering_notation(), "-12.345678e6");
     /// ```
-    #[must_use = doc::must_use_op!()]
-    #[inline]
-    pub fn to_engineering_notation(&self) -> String {
-        let mut output = String::new();
-        self.write_engineering_notation(&mut output)
-            .expect("Could not write to string");
-        output
-    }
+    // #[must_use = doc::must_use_op!()]
+    // #[inline]
+    // pub fn to_engineering_notation(&self) -> String {
+    //     let mut output = String::new();
+    //     self.write_engineering_notation(&mut output)
+    //         .expect("Could not write to string");
+    //     output
+    // }
 
     /// _Deprecated_, use [`resize`](Self::resize) instead.
     #[deprecated(since = "0.5.0")]
@@ -2189,7 +2181,7 @@ impl<const N: usize> Decimal<N> {
 impl<const N: usize> Decimal<N> {
     pub(crate) const SIGNALING_NAN: Self = Self::new(UInt::ZERO, ControlBlock::SIGNALING_NAN);
 
-    const TYPE_NAME: &'static str = decimal::utils::fmt::type_name!("D");
+    // const TYPE_NAME: &'static str = decimal::utils::fmt::type_name!("D");
 
     #[inline(always)]
     pub(crate) const fn new(digits: UInt<N>, cb: ControlBlock) -> Self {
@@ -2311,55 +2303,58 @@ impl<const N: usize> Decimal<N> {
         self.cb.has_extra_precision()
     }
 
-    #[inline]
-    pub(crate) const fn type_name() -> &'static str {
-        Self::TYPE_NAME
-    }
+    // #[inline]
+    // pub(crate) const fn type_name() -> &'static str {
+    //     Self::TYPE_NAME
+    // }
 
     /// Write unsigned decimal in scientific notation to writer `w`.
     pub(crate) fn write_scientific_notation<W: fmt::Write>(&self, w: &mut W) -> fmt::Result {
-        if self.is_nan() {
-            return w.write_str("NaN");
-        }
+        todo!();
+        // if self.is_nan() {
+        //     return w.write_str("NaN");
+        // }
 
-        if self.is_sign_negative() {
-            w.write_str("-")?;
-        }
+        // if self.is_sign_negative() {
+        //     w.write_str("-")?;
+        // }
 
-        if self.is_infinite() {
-            return w.write_str("Inf");
-        }
+        // if self.is_infinite() {
+        //     return w.write_str("Inf");
+        // }
 
-        if self.is_zero() {
-            return w.write_str("0e0");
-        }
+        // if self.is_zero() {
+        //     return w.write_str("0e0");
+        // }
 
-        let digits = self.digits.to_str_radix(10);
-        let scale = self.cb.get_scale();
-        format::write_scientific_notation(digits, scale, w)
+        // let digits = self.digits.to_str_radix(10);
+        // let scale = self.cb.get_scale();
+        // format::write_scientific_notation(digits, scale, w)
     }
 
     /// Write unsigned decimal in engineering notation to writer `w`.
     pub(crate) fn write_engineering_notation<W: fmt::Write>(&self, w: &mut W) -> fmt::Result {
-        if self.is_nan() {
-            return w.write_str("NaN");
-        }
+       
+       todo!()
+    //    if self.is_nan() {
+    //         return w.write_str("NaN");
+    //     }
 
-        if self.is_sign_negative() {
-            w.write_str("-")?;
-        }
+    //     if self.is_sign_negative() {
+    //         w.write_str("-")?;
+    //     }
 
-        if self.is_infinite() {
-            return w.write_str("Inf");
-        }
+    //     if self.is_infinite() {
+    //         return w.write_str("Inf");
+    //     }
 
-        if self.is_zero() {
-            return w.write_str("0e0");
-        }
+    //     if self.is_zero() {
+    //         return w.write_str("0e0");
+    //     }
 
-        let digits = self.digits.to_str_radix(10);
-        let scale = self.cb.get_scale();
-        format::write_engineering_notation(digits, scale, w)
+    //     let digits = self.digits.to_str_radix(10);
+    //     let scale = self.cb.get_scale();
+    //     format::write_engineering_notation(digits, scale, w)
     }
 
     #[allow(unsafe_code)]

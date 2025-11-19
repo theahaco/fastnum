@@ -4,8 +4,8 @@ use core::{
     num::{IntErrorKind, ParseIntError},
 };
 
-#[cfg(not(feature = "std"))]
-use crate::alloc::{format, string::String};
+// #[cfg(not(feature = "std"))]
+// use crate::alloc::{format, string::String};
 
 use crate::utils::err_prefix;
 
@@ -116,6 +116,13 @@ impl core::error::Error for ParseError {
     }
 }
 
+#[cfg(any(
+    feature = "sqlx",
+    feature = "diesel",
+    feature = "tokio-postgres",
+    feature = "extra-postgres",
+
+))]
 #[allow(dead_code)]
 #[inline]
 pub(crate) fn pretty_error_msg(ty: &str, e: ParseError) -> String {

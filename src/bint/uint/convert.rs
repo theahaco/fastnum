@@ -11,8 +11,8 @@ use to_int::*;
 use bnum::BUint;
 use core::str::from_utf8_unchecked;
 
-#[cfg(not(feature = "std"))]
-use crate::alloc::string::String;
+// #[cfg(not(feature = "std"))]
+// use crate::alloc::string::String;
 
 use crate::bint::{
     convert, doc,
@@ -29,9 +29,9 @@ impl<const N: usize> UInt<N> {
         Self(BUint::from_digit(n))
     }
 
-    convert::from_str::from_str_impl!(UInt, U, BUint);
+    // convert::from_str::from_str_impl!(UInt, U, BUint);
 
-    convert::from_bytes::from_bytes_impl!(UInt, U, BUint);
+    // convert::from_bytes::from_bytes_impl!(UInt, U, BUint);
 
     from_uint_impl!(
         from_u8 <- u8,
@@ -58,9 +58,9 @@ impl<const N: usize> UInt<N> {
 }
 
 impl<const N: usize> UInt<N> {
-    convert::to_str::to_str_impl!(UInt, U, BUint);
+    // convert::to_str::to_str_impl!(UInt, U, BUint);
 
-    convert::to_bytes::to_bytes_impl!(UInt, U, BUint);
+    // convert::to_bytes::to_bytes_impl!(UInt, U, BUint);
 
     to_int_impl!(
         to_i8 -> i8,

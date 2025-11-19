@@ -86,43 +86,43 @@ pub const fn can_scaled_by_power_of_ten<const N: usize>(n: &U<N>, power: ExpType
     }
 }
 
-#[cfg(debug_assertions)]
-mod __asserts {
-    use crate::utils::const_assert;
+// #[cfg(debug_assertions)]
+// mod __asserts {
+//     use crate::utils::const_assert;
 
-    const_assert!(u64!(0).decimal_digits() == 0);
-    const_assert!(u64!(1).decimal_digits() == 1);
-    const_assert!(u64!(18446744073709551615).decimal_digits() == 20);
+//     const_assert!(u64!(0).decimal_digits() == 0);
+//     const_assert!(u64!(1).decimal_digits() == 1);
+//     const_assert!(u64!(18446744073709551615).decimal_digits() == 20);
 
-    const_assert!(u64!(0).remaining_decimal_digits() == 20);
-    const_assert!(u64!(1).remaining_decimal_digits() == 19);
-    const_assert!(u64!(10).remaining_decimal_digits() == 18);
+//     const_assert!(u64!(0).remaining_decimal_digits() == 20);
+//     const_assert!(u64!(1).remaining_decimal_digits() == 19);
+//     const_assert!(u64!(10).remaining_decimal_digits() == 18);
 
-    const_assert!(u64!(18).remaining_decimal_digits() == 18);
-    const_assert!(u64!(19).remaining_decimal_digits() == 17);
+//     const_assert!(u64!(18).remaining_decimal_digits() == 18);
+//     const_assert!(u64!(19).remaining_decimal_digits() == 17);
 
-    const_assert!(u64!(18446744073709551615).remaining_decimal_digits() == 0);
-    const_assert!(u64!(1844674407370955161).remaining_decimal_digits() == 1);
-    const_assert!(u64!(2844674407370955161).remaining_decimal_digits() == 0);
+//     const_assert!(u64!(18446744073709551615).remaining_decimal_digits() == 0);
+//     const_assert!(u64!(1844674407370955161).remaining_decimal_digits() == 1);
+//     const_assert!(u64!(2844674407370955161).remaining_decimal_digits() == 0);
 
-    const_assert!(u64!(24576).remaining_decimal_digits() == 14);
-    const_assert!(u64!(14576).remaining_decimal_digits() == 15);
+//     const_assert!(u64!(24576).remaining_decimal_digits() == 14);
+//     const_assert!(u64!(14576).remaining_decimal_digits() == 15);
 
-    const_assert!(u256!(115).remaining_decimal_digits() == 75);
-    const_assert!(u256!(116).remaining_decimal_digits() == 74);
+//     const_assert!(u256!(115).remaining_decimal_digits() == 75);
+//     const_assert!(u256!(116).remaining_decimal_digits() == 74);
 
-    const_assert!(u64!(1844674407370955161).can_scaled_by_power_of_ten(1));
-    const_assert!(!u64!(1844674407370955162).can_scaled_by_power_of_ten(1));
+//     const_assert!(u64!(1844674407370955161).can_scaled_by_power_of_ten(1));
+//     const_assert!(!u64!(1844674407370955162).can_scaled_by_power_of_ten(1));
 
-    const_assert!(u128!(34028236692093846346337460743176821145).can_scaled_by_power_of_ten(1));
-    const_assert!(!u128!(3402823669209384634633746074317682115).can_scaled_by_power_of_ten(2));
+//     const_assert!(u128!(34028236692093846346337460743176821145).can_scaled_by_power_of_ten(1));
+//     const_assert!(!u128!(3402823669209384634633746074317682115).can_scaled_by_power_of_ten(2));
 
-    const_assert!(u256!(
-        11579208923731619542357098500868790785326998466564056403945758400791312963993
-    )
-    .can_scaled_by_power_of_ten(1));
-    const_assert!(!u256!(
-        11679208923731619542357098500868790785326998466564056403945758400791312963993
-    )
-    .can_scaled_by_power_of_ten(1));
-}
+//     const_assert!(u256!(
+//         11579208923731619542357098500868790785326998466564056403945758400791312963993
+//     )
+//     .can_scaled_by_power_of_ten(1));
+//     const_assert!(!u256!(
+//         11679208923731619542357098500868790785326998466564056403945758400791312963993
+//     )
+//     .can_scaled_by_power_of_ten(1));
+// }

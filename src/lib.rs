@@ -6,8 +6,8 @@
 // #[cfg(all(not(feature = "std"), not(feature="no_alloc")))]
 // extern crate alloc;
 
-#[cfg(not(feature = "std"))]
-pub use bnum::alloc;
+// #[cfg(not(feature = "std"))]
+// pub use bnum::alloc as alloc;
 
 extern crate core;
 

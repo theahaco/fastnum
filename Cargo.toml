@@ -26,7 +26,7 @@ bench = false
 
 [dependencies]
 
-bnum = { version = "0.13.0",  git = "https://github.com/theahaco/bnum", rev = "eea2eec5325ac0be77665a79c9a3f169e06fd583" }
+bnum = { version = "0.13.0",  git = "https://github.com/theahaco/bnum", rev = "5e0b678718a092415633a0c9646a4fdef7a52a43" }
 
 num-integer = { version = "0.1", default-features = false, optional = true }
 num-traits = { version = "0.2", default-features = false, optional = true }
